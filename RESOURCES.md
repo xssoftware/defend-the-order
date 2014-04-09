@@ -16,3 +16,5 @@
 14. [Build a simple chat application with node.js](http://martinsikora.com/nodejs-and-websocket-simple-chat-tutorial)
 15. [Install MySQL](http://dev.mysql.com/doc/refman/5.7/en/binary-installation.html)
 16. [Install MySQL on Ubuntu](https://help.ubuntu.com/12.04/serverguide/mysql.html)
+17. [Install PostgreSQL on Ubuntu](https://help.ubuntu.com/community/PostgreSQL)
+18. [PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/index.html)
