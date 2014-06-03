@@ -6,8 +6,15 @@ gem 'rails', '4.0.2'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
+#For use with our new login/register authentication
+# gem "bcrypt-ruby", :require => "bcrypt"
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+
+gem 'protected_attributes'
+
+gem 'devise', '3.0.0.rc' 
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -32,8 +39,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+# gem 'authlogic', '~> 3.4.2'
+
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+# gem 'bcrypt-ruby', '~> 3.1.7'
 
 # Use unicorn as the app server
 # gem 'unicorn'
