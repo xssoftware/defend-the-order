@@ -7,7 +7,7 @@ gem 'rails', '4.0.2'
 gem 'sqlite3'
 
 #For use with our new login/register authentication
-# gem "bcrypt-ruby", :require => "bcrypt"
+gem "bcrypt-ruby", :require => "bcrypt"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -39,6 +39,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+#for twitter bootstrap
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails"
 # gem 'authlogic', '~> 3.4.2'
 
 # Use ActiveModel has_secure_password
