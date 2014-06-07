@@ -43,6 +43,22 @@ end
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
+
+
+group :development, :test do
+  gem 'rspec-rails', '2.13.1'
+end
+
+group :test do
+  gem 'selenium-webdriver', '~> 2.42.0'
+  gem 'capybara', '2.1.0'
+end
+
+group :production do
+  gem 'pg', '0.17.1'
+  gem 'rails_12factor', '0.0.2'
+end
+
 # gem 'authlogic', '~> 3.4.2'
 
 # Use ActiveModel has_secure_password
