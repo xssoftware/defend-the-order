@@ -29,7 +29,7 @@ AssetsLoader.prototype.addImage = function(name, url){
 
 
 AssetsLoader.prototype.getImage = function(name){
-	return = this.images[name];
+	return  this.images[name];
 };
 
 

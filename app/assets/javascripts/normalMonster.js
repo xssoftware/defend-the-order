@@ -1,11 +1,10 @@
 'use strict';
 
 
-function normalMonster(route, layer){
+function NormalMonster(){
 
-this.route=route;
 
 
 }
 
-Monster_1.prototype = new NonsterBase();
+NormalMonster.prototype = new MonsterBase();

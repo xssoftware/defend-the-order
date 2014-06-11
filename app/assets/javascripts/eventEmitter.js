@@ -2,7 +2,7 @@
 
 
 function EventEmitter(){
-	this.events {};
+	this.events = {};
 };
 
 

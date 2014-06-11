@@ -1,3 +1,4 @@
+
 <h1>StaticPages#game</h1>
 <p>Find me in app/views/static_pages/game.html.erb</p>
 <style>
@@ -9,3 +10,22 @@
 }
 </style>
 <div id="game1"></div>
+
+fff
+
+
+<%= @extra_title %>
+
+<script  >
+	
+	window.onload = function(){
+		var levelInfo = {};
+		var game = new Game();
+		game.init(levelInfo, 'game1');
+	
+	};
+	
+	
+	
+
+</script> 

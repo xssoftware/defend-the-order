@@ -1,11 +1,9 @@
 'use strict';
 
 
-function speedMonster(route, layer){
-
-this.route=route;
+function SpeedMonster(){
 
 
 }
 
-Monster_1.prototype = new NonsterBase();
+SpeedMonster.prototype = new MonsterBase();

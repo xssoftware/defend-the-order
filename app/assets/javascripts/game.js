@@ -9,9 +9,13 @@ function Game(){
 	
 	this.stage = null;
 	this.layer = null;
+	this.coordsLayer = null;
 	
-	this.stageWidth = 500;
+	this.stageWidth = 900;
 	this.stageHeight = 500;
+	
+	this.coordWidth = 50;
+	this.coordHeight = 50;
 	
 	this.levelInfo = {};
 
@@ -52,25 +56,23 @@ Game.prototype.init = function(levelInfo, containerId){
 	
 	this.levelInfo = levelInfo;
 	
-	this.assetsLoader.addImage('monsters1', 'url to monsters sprite');
-	this.assetsLoader.addImage('monsters2', 'url to monsters sprite');
-	this.assetsLoader.addImage('monsters3', 'url to monsters sprite');
-	this.assetsLoader.addImage('monsters4', 'url to monsters sprite');
-	this.assetsLoader.addImage('monsters5', 'url to monsters sprite');
+
 	
-	this.assetsLoader.addImage('background', levelInfo['url to monsters sprite']);
-	....
+	this.assetsLoader.addImage('background', );
+
 	
 	
 	this.stage = new Kinetic.Stage({
-	  width: 500,
-	  height: 800,
+	  width: this.stageWidth,
+	  height: this.stageHeight,
 	  container: containerId
 	});
 	
 	this.layer = new Kinetic.Layer();
+	this.coordsLayer = new Kinetic.Layer();
 	
 	this.stage.add(this.layer);
+	this.stage.add(this.coordsLayer);
 	
 	
 	this.assetsLoader.eventEmitter.registerEvent('ready', function(){
@@ -82,14 +84,20 @@ Game.prototype.init = function(levelInfo, containerId){
 
 Game.prototype.initLevel = function(){
 	
-	var background = new Kinetic.Image({
+	
+	  this.drawTerrain();
+	  
+	  
+	  
+	  
+	  
+	  var background = new Kinetic.Image({
 		x: 0,
 		y: 0,
 		image: this.assetsLoader.getImage('background'),
 		width: this.stageWidth,
 		height: this.stageHeight
 	  });
-	  
 	  
 	  this.layer.add(background);
 	  this.layer.draw();
@@ -114,9 +122,28 @@ Game.prototype.createWave = function(){
 
 }
 
-Game.prototype.drawTerrain=function(){
+Game.prototype.drawTerrain = function(){
+	var i, j, coord;
 
-}
+	for(i = 0; i < this.stageWidth / this.coordWidth; i++){
+		for(j = 0; j < this.stageHeight / this.coordHeight; j++){
+
+				coord = new Kinetic.Rect({
+					  width: this.coordWidth,
+					  height: this.coordHeight,
+					  x : i * this.coordWidth,
+					  y : j * this.coordHeight,
+					  stroke: 'black',
+					  strokeWidth: 1
+					});
+					
+				this.coordsLayer.add(coord);
+		}
+	}
+	
+	this.coordsLayer.draw();
+
+};
 
 Game.prototype.startLevel=function(){
 

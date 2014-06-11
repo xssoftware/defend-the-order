@@ -1,22 +1,27 @@
 'use strict';
 
 
-function MonsterBase(route, layer){
+function MonsterBase(){
+
+}
+
+MonsterBase.prototype.setMonsterInfo = function(route, layer){
+
 	this.x = route[0].x;
 	this.y = route[0].y;
 	
 	this.eventEmitter = new EventEmitter();
-	///
+
+	this.speed = 0;
+	this.health = 0;
 	
-	this.speed=speed;
-	this.health=health;
 	
-	
-	this.route = [{x:1, y:1}, {x:20, y :33,.....}];
+	this.route = [{x:1, y:1}, {x:20, y :33}];
 	this.routeIndex = 0;
 	
-	this.layer = layer;
+	this.layer = null;
 	
+	/*
 	this.sprite = new Kinetic.Sprite({
 		x: 1,
 		y: 1,
@@ -36,7 +41,7 @@ function MonsterBase(route, layer){
 		frameRate: 7,
 		frameIndex: 0
   );
-  
+  */
   this.container = new Kinteic.Group({
 	x:this.x,
 	y:this.y,
@@ -44,11 +49,12 @@ function MonsterBase(route, layer){
 	height: this.height
   });
   
-  this.container.add(this.sprite);
+  //this.container.add(this.sprite);
   this.layer.add(this.container);
-	
 
-}
+
+};
+
 
 MonsterBase.prototype.moveTo = function(coordX, coordY){
 	var dx = coordX - this.x;
