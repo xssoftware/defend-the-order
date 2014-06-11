@@ -58,8 +58,8 @@ Game.prototype.init = function(levelInfo, containerId){
 	
 
 	
-	this.assetsLoader.addImage('background', );
-
+	this.assetsLoader.addImage('background', levelInfo.backgroundUrl);
+	this.assetsLoader.addImage('monster1Url', levelInfo.monster1Url);
 	
 	
 	this.stage = new Kinetic.Stage({
@@ -111,7 +111,7 @@ Game.prototype.initLevel = function(){
 
 Game.prototype.createWave = function(){
 	var self = this;
-	var wave = new Wave(this.levelInfo.monsterType, this.levelInfo.route);
+	var wave = new Wave(this.levelInfo.monsterType, this.levelInfo.route, this.layer);
 	this.wavesCreated++;
 	
 	wave.spawn();

@@ -17,7 +17,7 @@ AssetsLoader.prototype.addImage = function(name, url){
 	
 	image.onload = function(){
 		self.imagesToLoad--;
-		if(this.imagesToLoad === 0){
+		if(self.imagesToLoad === 0){
 			self.ready();
 		}
 		
@@ -34,5 +34,6 @@ AssetsLoader.prototype.getImage = function(name){
 
 
 AssetsLoader.prototype.ready = function(){
+
 	this.eventEmitter.emit('ready');
 };

@@ -1,9 +1,10 @@
 
-function Wave(monstersType, route ){
+function Wave(monstersType, route, layer ){
 	
 	this.monstersCount = 10;
 	this.route = route;
-	this.monsterType=monsterType;
+	this.layer = layer;
+	this.monsterType = monstersType;
 	this.eventEmitter = new EventEmitter();
 	this.monsters = [];
 	this.monstersType = monstersType;
@@ -25,7 +26,9 @@ Wave.prototype.spawn = function(){
 
 
 Wave.prototype.createMonster = function(){
-	var monster = new Monster_1(route);
+	// create monster acording to monsterType
+	var monster = new NormalMonster();
+	monster.setMonsterInfo(this.route, this.layer)
 	this.monsters.push(monster);
 	
 	monster.eventEmitter.registerEvent('mosterDead', function(monster){

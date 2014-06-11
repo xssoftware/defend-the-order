@@ -14,14 +14,13 @@
 fff
 
 
-<%= @extra_title %>
+<%= @levelInfo %>
 
 <script  >
 	
 	window.onload = function(){
-		var levelInfo = {};
 		var game = new Game();
-		game.init(levelInfo, 'game1');
+		game.init(<%= @levelInfo %>, 'game1');
 	
 	};
 	

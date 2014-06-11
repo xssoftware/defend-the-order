@@ -19,16 +19,16 @@ MonsterBase.prototype.setMonsterInfo = function(route, layer){
 	this.route = [{x:1, y:1}, {x:20, y :33}];
 	this.routeIndex = 0;
 	
-	this.layer = null;
+	this.layer = layer;
 	
 	/*
 	this.sprite = new Kinetic.Sprite({
 		x: 1,
 		y: 1,
 		image: imageObj,
-		animation: 'standing',
+		animation: 'walking_left',
 		animations: {
-		  walking: [
+		  walking_left: [
 			// x, y, width, height (6 frames)
 			0, 0, 49, 109,
 			52, 0, 49, 109,
@@ -42,16 +42,18 @@ MonsterBase.prototype.setMonsterInfo = function(route, layer){
 		frameIndex: 0
   );
   */
-  this.container = new Kinteic.Group({
+  this.container = new Kinetic.Group({
 	x:this.x,
 	y:this.y,
 	width: this.width,
 	height: this.height
   });
   
+  //this.container(this.sprite);
+  
   //this.container.add(this.sprite);
   this.layer.add(this.container);
-
+	this.layer.draw();
 
 };
 
