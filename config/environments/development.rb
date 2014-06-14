@@ -26,10 +26,7 @@ DefendTheOrder::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-<<<<<<< HEAD
 
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
-=======
   config.serve_static_assets = true
->>>>>>> 3844b0170e5bed70c602370523c3e5e11b160600
 end
