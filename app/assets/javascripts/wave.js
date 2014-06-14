@@ -29,21 +29,21 @@ Wave.prototype.spawn = function(){
 Wave.prototype.createMonster = function(){
 	// create monster acording to monsterType
 	var monster = new NormalMonster();
+	var self = this;
 	monster.setMonsterInfo(this.route, this.game);
 	
 	this.monsters.push(monster);
 	
-	monster.eventEmitter.registerEvent('mosterDead', function(monster){
-		var index = this.monsters.indexOf(monster);
-		this.monster.splice(index, 1);
+	monster.eventEmitter.registerEvent('monsterDead', function(monster){
+		var index = self.monsters.indexOf(monster);
+		self.monsters.splice(index, 1);
 		
-		if(this.monsters.length === 0){
-			this.eventEmitter.emit('waveCleared');
+		
+		if(self.monsters.length === 0){
+			self.eventEmitter.emit('waveCleared');
+			console.log('wave cleared');
 		}
 	});
 };
 
 
-Wave.prototype.remove =function(){
-
-}
