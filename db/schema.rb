@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140614072640) do
+ActiveRecord::Schema.define(version: 20_140_614_072_640) do
 
-  create_table "users", force: true do |t|
-    t.string   "email"
-    t.string   "password_hash"
-    t.string   "password_salt"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "auth_token"
-    t.string   "password_reset_token"
-    t.datetime "password_reset_sent_at"
+  create_table 'users', force: true do |t|
+    t.string 'email'
+    t.string 'password_hash'
+    t.string 'password_salt'
+    t.datetime 'created_at'
+    t.datetime 'updated_at'
+    t.string 'auth_token'
+    t.string 'password_reset_token'
+    t.datetime 'password_reset_sent_at'
   end
 
 end

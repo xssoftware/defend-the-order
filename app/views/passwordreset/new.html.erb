@@ -1,4 +1,4 @@
-<form action="" class="form-signin" role="form">
+<%= form_for(@user, :url => passwordreset_path(params[:id]), html: {class: 'form-signin', role: "form"}) do |f| %>
 <h2 class="form-signin-heading">Reset password</h2>
   <div class="field">
     <%= label_tag :email %>
@@ -6,6 +6,6 @@
   </div>
   <br>
   <button class="btn btn-lg btn-primary btn-block" type="submit">Reset Password</button>
-</form>
+<%end%>
 
 
