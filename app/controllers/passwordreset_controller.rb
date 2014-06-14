@@ -1,4 +1,4 @@
-class PasswordResetsController < ApplicationController
+class PasswordresetController < ApplicationController
   def new
   end
   
@@ -9,6 +9,9 @@ def create
   redirect_to root_url, :notice => "Email sent with password reset instructions."
 end
 
+def show
+
+end
 # def edit
 #   @user = User.find_by_password_reset_token!(params[:id])
 # end

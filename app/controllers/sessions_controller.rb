@@ -1,11 +1,9 @@
-require 'pp'
 class SessionsController < ApplicationController
 	def new
 	end
 
 	def create
 	  user = User.find_by_email(params[:email])
-    print YAML::dump(user)
 	  if user && user.authenticate(params[:email], params[:password])
 	    if params[:remember_me]
 	      cookies.permanent[:auth_token] = user.auth_token
@@ -23,6 +21,4 @@ class SessionsController < ApplicationController
 	  cookies.delete(:auth_token)
 	  redirect_to root_url, :notice => "Logged out!"
 	end
-
-
 end

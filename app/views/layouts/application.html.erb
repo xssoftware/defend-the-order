@@ -41,22 +41,21 @@
     <div id="user_nav">
       <% if current_user %>
         Logged in as <%= current_user.email %>.
-        <%= link_to "Log out", log_out_path %>
+        <%= link_to "Log out", logout_path %>
       <% else %>
-        <%= link_to "Sign up", sign_up_path %> or
-        <%= link_to "log in", log_in_path %>
+        <%= link_to "Sign up", signup_path %> or
+        <%= link_to "log in", login_path %>
       <% end %>
     </div>
     <div class="container">
         <div class="row">
           <div class="span9">
-            
             <%= yield %>
           </div>
         </div><!--/row-->
 
       <footer>
-        <p>&copy; Company 2014</p>
+        <p>&copy; Company Joro i Nikoi Drug!2014</p>
       </footer>
 
     </div> <!-- /container -->
