@@ -16,5 +16,8 @@ EventEmitter.prototype.unRegisterEvent  = function(type, handler){
 
 EventEmitter.prototype.emit = function(type, data){
 	data = data || {};
-	this.events[type](data);
+	if(this.events[type]){
+		this.events[type](data);
+	}
+	
 };

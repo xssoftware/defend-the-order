@@ -77,6 +77,7 @@ MonsterBase.prototype.moveTo = function(coordX, coordY){
 
 
 MonsterBase.prototype.die = function(){
+	
 	this.container.remove();
 	this.eventEmitter.emit('monsterDead', this);
 };
@@ -84,4 +85,19 @@ MonsterBase.prototype.die = function(){
 MonsterBase.prototype.calculateScreenCoords = function(){
 	this.screenX = this.x * this.game.coordWidth - this.game.coordWidth / 2;
 	this.screenY = this.y * this.game.coordHeight - this.game.coordHeight / 2;
+};
+
+
+MonsterBase.prototype.sustainDamage = function(damage){
+	if(!this.isAlive()){
+		return false;
+	}
+	this.health -= damage;
+	if(this.health <= 0){
+		this.die();
+	}
+};
+
+MonsterBase.prototype.isAlive = function(){
+	return this.health > 0;
 };

@@ -2,7 +2,7 @@
 
 function Game(){
 
-	this.wavesCount = 10;
+	this.wavesCount = 3;
 	this.wavesCreated = 0;
 	this.waves = [];
 	
@@ -95,6 +95,10 @@ Game.prototype.createWave = function(){
 	var wave = new Wave(this.levelInfo.monsterType, this.levelInfo.route, this);
 	this.wavesCreated++;
 	
+	if(this.wavesCreated > this.wavesCount){
+		return;
+	}
+	
 	this.waves.push(wave);
 	
 	wave.spawn();
@@ -103,7 +107,7 @@ Game.prototype.createWave = function(){
 		self.createWave();
 	});
 
-}
+};
 
 Game.prototype.drawTerrain = function(){
 	var i, j, coord;
@@ -116,8 +120,9 @@ Game.prototype.drawTerrain = function(){
 					  height: this.coordHeight,
 					  x : i * this.coordWidth,
 					  y : j * this.coordHeight,
-					  stroke: 'black',
-					  strokeWidth: 1,
+					  stroke: 'grey',
+					  strokeWidth: 0.5,
+					  dash : [1,2]
 					});
 					
 					
@@ -195,6 +200,7 @@ Game.prototype.clickedTower =function(towerId){
 					self.coordCells[i].off('click');
 					self.coordCells[i].off('mouseover');
 				}
+				image.remove();
 				self.coordsLayer.visible(false);
 			};
 		}(this.coordCells[i]));

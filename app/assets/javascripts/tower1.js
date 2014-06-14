@@ -4,24 +4,29 @@
 function Tower_1(game){
 	this.game = game;
 	this.layer = game.layer;
-	this.range = 100;
+	this.range = 1000;
 	this.interval = null;
 	this.width = 50;
 	this.height = 50;
+	this.reloadInterval = 800;
+	this.lastFired = 0;
+	this.damage = 10;
 }
 
 
+Tower_1.prototype = new TowerBase();
+
 Tower_1.prototype.init = function(x, y){
-	this.screenX = x;
-	this.screenY = y;
+	this.screenX = x + this.width / 2;
+	this.screenY = y + this.height / 2;
 	var self = this;
 	
 	this.image = new Kinetic.Image({
 		image : this.game.assetsLoader.getImage('tower1'),
 		x : this.screenX,
 		y : this.screenY,
-		width:50,
-		height:50
+		width:this.width,
+		height:this.height
 	});
 	
 	this.image.offsetX(this.width / 2);
@@ -32,47 +37,11 @@ Tower_1.prototype.init = function(x, y){
 	
 	setInterval(function(){
 		self.scan();
-	}, 200);
+	}, 100);
 	
 };
 
 
-Tower_1.prototype.scan = function(){
-	var i;
-	var monsters = [];
-	for(i = 0; i < this.game.waves.length; i++){
-		monsters = monsters.concat(this.game.waves[i].monsters);
-	}
-
-	for(i = 0; i < monsters.length; i++){
-		if(this.isInRange(monsters[i].screenX, monsters[i].screenY)){
-			this.rotateTo(monsters[i].screenX, monsters[i].screenY);
-			this.fire(monsters[i]);
-		}
-	}
-	
-};
 
 
-Tower_1.prototype.isInRange = function(x, y){
-	var dx = this.screenX - x;
-	var dy = this.screenY - y;
-	var dist = Math.sqrt(dx * dx + dy * dy);
 
-	return dist <= this.range;
-};
-
-
-Tower_1.prototype.rotateTo = function(x, y){
-	var dx = this.screenX - x;
-	var dy = this.screenY - y;
-	var angle = Math.atan2(dy, dx);
-	angle = angle * 180 / Math.PI;
-
-	this.image.rotation(angle);
-};
-
-
-Tower_1.prototype.fire = function(monster){
-	
-};
