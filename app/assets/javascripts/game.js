@@ -120,8 +120,9 @@ Game.prototype.drawTerrain = function(){
 					  height: this.coordHeight,
 					  x : i * this.coordWidth,
 					  y : j * this.coordHeight,
-					  stroke: 'black',
-					  strokeWidth: 1,
+					  stroke: 'grey',
+					  strokeWidth: 0.5,
+					  dash : [1,2]
 					});
 					
 					
