@@ -4,6 +4,7 @@ function Game(){
 
 	this.wavesCount = 10;
 	this.wavesCreated = 0;
+	this.waves = [];
 	
 	this.assetsLoader = new AssetsLoader();
 	
@@ -14,44 +15,17 @@ function Game(){
 	this.stageWidth = 900;
 	this.stageHeight = 500;
 	
-	this.coordWidth = 50;
+	this.coordWidth = 53;
 	this.coordHeight = 50;
 	
 	this.levelInfo = {};
+	this.coordCells = [];
 
 	
 	
 	
 }
 
-
-//const TILE_H = 15;
-//const TILE_W = 15;
-//const MAP_H = 30;
-//const MAP_W = 80;
-
-/*
-function level1(i,j)
-{
-	if(	(i == 0 && (j >= 0 && j <= 2))
-		|| (j == 2 && (i >=0 && i < 70))
-		|| (i == 70 && (j >=2 && j <= 28))
-		|| (j == 28 && (i <= 70 && i >= 60))
-		|| (i == 60 && (j <= 28 && j >= 5))
-		|| (j == 5 && (i <= 60 && i >= 40))
-		|| (i == 40 && (j >= 5 && j <= 25))
-		|| (j == 25 && (i <= 40 && i >= 30))
-		|| (i == 30 && (j >= 20 && j <= 25))
-		|| (j == 20 && (i <= 30 && i >= 5))
-		|| (i == 5 && (j <= 20 && j >= 10))
-		|| (j == 10 && (i >= 5 && i <= 80))
-		)
-	{
-		return true;
-	}
-	return false;
-}
-*/
 
 
 Game.prototype.init = function(levelInfo, containerId){
@@ -63,6 +37,7 @@ Game.prototype.init = function(levelInfo, containerId){
 	
 	this.assetsLoader.addImage('background', levelInfo.backgroundUrl);
 	this.assetsLoader.addImage('monster1Url', levelInfo.monster1Url);
+	this.assetsLoader.addImage('tower1', levelInfo.tower1Url);
 	
 	
 	
@@ -93,10 +68,7 @@ Game.prototype.initLevel = function(){
 	
 	
 	  this.drawTerrain();
-	  
-	  
-	  
-	  
+
 	  
 	  var background = new Kinetic.Image({
 		x: 0,
@@ -112,68 +84,7 @@ Game.prototype.initLevel = function(){
 	  
 	  
 	  this.createWave();
-	  NormalMonster.plsWork();
-	 
-
-	  
-	  
-			
-	window.onload = function(){
-        var stage = new Kinetic.Stage({
-            container1: 'cantainer1',
-            width: 800,
-            height: 600
-        });
-
-        var layer = new Kinetic.Layer();
-
-        var image = new Image();
-        var image2 = new Image();
-        var newX = 500;
-        var animations = {
-        pos1: [{
-            x: 32,
-            y: 32,
-            width: 32,
-            height: 32
-            },
-            {
-            x: 64,
-            y: 32,
-            width: 32,
-            height: 32
-            },
-            {
-            x: 96,
-            y: 32,
-            width: 32,
-            height: 32
-            },{
-            x: 128,
-            y: 32,
-            width: 32,
-            height: 32
-            },
-            {
-            x: 160,
-            y: 32,
-            width: 32,
-            height: 32
-            },
-            {
-            x: 32,
-            y: 0,
-            width: 32,
-            height: 32
-            },],
-
-
-
-        };
-
-}
-	  
-		
+	
 
 };
 
@@ -181,8 +92,10 @@ Game.prototype.initLevel = function(){
 
 Game.prototype.createWave = function(){
 	var self = this;
-	var wave = new Wave(this.levelInfo.monsterType, this.levelInfo.route, this.layer);
+	var wave = new Wave(this.levelInfo.monsterType, this.levelInfo.route, this);
 	this.wavesCreated++;
+	
+	this.waves.push(wave);
 	
 	wave.spawn();
 	
@@ -204,21 +117,109 @@ Game.prototype.drawTerrain = function(){
 					  x : i * this.coordWidth,
 					  y : j * this.coordHeight,
 					  stroke: 'black',
-					  strokeWidth: 1
+					  strokeWidth: 1,
 					});
 					
+					
+				this.coordCells.push(coord);
+					
 				this.coordsLayer.add(coord);
+				
 		}
 	}
 	
+	this.coordsLayer.visible(false);
 	this.coordsLayer.draw();
 
 };
 
 Game.prototype.startLevel=function(){
 
-}
+};
 
 Game.prototype.finishLevel =function(){
 
-}
+};
+
+
+Game.prototype.clickedTower =function(towerId){
+	var i;
+	var self = this;
+	var image = new Kinetic.Image({
+		image : this.assetsLoader.getImage('tower1'),
+		x:0,
+		y:0,
+		width:50,
+		height:50
+	});
+	
+	
+	
+	this.coordsLayer.add(image);
+	this.coordsLayer.visible(true);
+	image.setZIndex(1);
+	this.coordsLayer.draw();
+	
+	for(i = 0; i < this.coordCells.length; i++){
+		this.coordCells[i].setZIndex(2);
+		this.coordCells[i].on('mouseover', function(cell){
+			return function(){
+				var position = cell.position();
+				var gameCoords = self.screenToGameCoords(position.x, position.y);
+				var i;
+				
+				for(i = 0; i < self.levelInfo.route.length; i++){
+					if(self.levelInfo.route[i].x == gameCoords.x && self.levelInfo.route[i].y == gameCoords.y){
+						return false;
+					}
+				}
+				
+				image.position(cell.position());
+				self.coordsLayer.draw();
+			};
+		}(this.coordCells[i]));
+		
+		this.coordCells[i].on('click', function(cell){
+			return function(){
+				var position = cell.position();
+				var gameCoords = self.screenToGameCoords(position.x, position.y);
+				var i;
+				
+				for(i = 0; i < self.levelInfo.route.length; i++){
+					if(self.levelInfo.route[i].x == gameCoords.x && self.levelInfo.route[i].y == gameCoords.y){
+						return false;
+					}
+				}
+				self.placeTower(towerId, position.x, position.y);
+				for(i = 0; i < self.coordCells.length; i++){
+					self.coordCells[i].off('click');
+					self.coordCells[i].off('mouseover');
+				}
+				self.coordsLayer.visible(false);
+			};
+		}(this.coordCells[i]));
+	}
+};
+
+
+Game.prototype.placeTower =function(towerId, x, y){
+	//use correct tower type
+	var tower = new Tower_1(this);
+	tower.init(x,y);
+};
+
+
+Game.prototype.screenToGameCoords =function(x, y){
+	var coordX = x  / this.coordWidth + 1;
+	var coordY = y  / this.coordHeight + 1;
+	return {x : coordX, y : coordY};
+};
+
+Game.prototype.gameToScreenCoords =function(x, y){
+	var coordX = x  * this.coordWidth;
+	var coordY = y  * this.coordHeight;
+	return {x : coordX, y : coordY};
+};
+
+
+

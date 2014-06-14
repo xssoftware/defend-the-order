@@ -2,81 +2,75 @@
 
 
 function MonsterBase(){
-
+	this.x = 0;
+	this.y = 0;
+	this.screenX = 0;
+	this.screenY = 0;
+	this.game = null;
+	this.width = 0;
+	this.height = 0;
+	this.routeIndex = 0;
+	this.speed = 1;
+	this.eventEmitter = new EventEmitter();
+	this.health = 0;
+	this.routeIndex = 1;
+	
 }
 
 MonsterBase.prototype.setMonsterInfo = function(route, layer){
 
-	this.x = route[0].x;
-	this.y = route[0].y;
 	
-	this.eventEmitter = new EventEmitter();
-
-	this.speed = 0;
-	this.health = 0;
-	
-	
-	this.route = [{x:1, y:1}, {x:20, y :33}];
-	this.routeIndex = 0;
-	
-	this.layer = layer;
-	
-	/*
-	this.sprite = new Kinetic.Sprite({
-		x: 1,
-		y: 1,
-		image: imageObj,
-		animation: 'walking_left',
-		animations: {
-		  walking_left: [
-			// x, y, width, height (6 frames)
-			0, 0, 49, 109,
-			52, 0, 49, 109,
-			105, 0, 49, 109,
-			158, 0, 49, 109,
-			210, 0, 49, 109,
-			262, 0, 49, 109
-		  ]         
-		},
-		frameRate: 7,
-		frameIndex: 0
-  );
-  */
-  this.container = new Kinetic.Group({
-	x:this.x,
-	y:this.y,
-	width: this.width,
-	height: this.height
-  });
-  
-  //this.container(this.sprite);
-  
-  //this.container.add(this.sprite);
-  this.layer.add(this.container);
-	this.layer.draw();
 
 };
 
 
 MonsterBase.prototype.moveTo = function(coordX, coordY){
-	var dx = coordX - this.x;
-	var dy = coordY - this.y;
-	var dist = Math.sqrt(dx * dx + dy * dy);
-	var tweenDuration = distance / this.speed;
-	var self = this;
+	var currentX = this.screenX;
+	var currentY = this.screenY;
+	this.x = coordX;
+	this.y = coordY;
+	this.calculateScreenCoords();
 	
+
+	
+	var dx = this.screenX - currentX;
+	var dy = this.screenY - currentY;
+	var dist = Math.sqrt(dx * dx + dy * dy);
+	
+	var direction = '';
+	var tweenDuration = dist / this.speed;
+	var self = this;
+
+	
+	
+	if(this.screenX > currentX){
+		direction = 'walking_right';
+	} else if(this.screenX < currentX){
+		direction = 'walking_left';
+	} else if(this.screenY < currentY){
+		direction = 'walking_back';
+	} else {
+		direction = 'walking_front';
+	}
+	
+	this.sprite.animation(direction);
+
+
 	this.routeIndex++;
 	
 	var tween = new Kinetic.Tween({
 	  node: this.container,
-	  x : coordX,
-	  y : coordY,
+	  x : this.screenX,
+	  y : this.screenY,
 	  duration: tweenDuration,
-	  easing: Kinetic.Easings.EaseInOut,
-	  onFinish: function(){	  
-		self.movetTo(self.route[routeIndex].x, self.route[routeIndex].y);
+	  easing: Kinetic.Easings.Linear,
+	  onFinish: function(){	 
+		if(self.route[self.routeIndex]){
+			self.moveTo(self.route[self.routeIndex].x, self.route[self.routeIndex].y);
+		}
+		
 	  }
-	});
+	}).play();
 
 };
 
@@ -87,3 +81,7 @@ MonsterBase.prototype.die = function(){
 	this.eventEmitter.emit('monsterDead', this);
 };
 
+MonsterBase.prototype.calculateScreenCoords = function(){
+	this.screenX = this.x * this.game.coordWidth - this.game.coordWidth / 2;
+	this.screenY = this.y * this.game.coordHeight - this.game.coordHeight / 2;
+};

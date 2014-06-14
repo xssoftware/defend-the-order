@@ -11,6 +11,12 @@
 </style>
 <div id="game1"></div>
 
+<div id="towers" >
+
+	<img id="tower1" src="/tower1icon.png" width="50" height="50" />
+
+</div>
+
 fff
 
 
@@ -21,6 +27,10 @@ fff
 	window.onload = function(){
 		var game = new Game();
 		game.init(<%= @levelInfo %>, 'game1');
+
+		$('#tower1').click(function(){
+			game.clickedTower(1);
+		});
 	
 	};
 	
