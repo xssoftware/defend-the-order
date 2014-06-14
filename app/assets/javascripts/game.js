@@ -19,6 +19,9 @@ function Game(){
 	
 	this.levelInfo = {};
 
+	
+	
+	
 }
 
 
@@ -62,6 +65,7 @@ Game.prototype.init = function(levelInfo, containerId){
 	this.assetsLoader.addImage('monster1Url', levelInfo.monster1Url);
 	
 	
+	
 	this.stage = new Kinetic.Stage({
 	  width: this.stageWidth,
 	  height: this.stageHeight,
@@ -79,6 +83,9 @@ Game.prototype.init = function(levelInfo, containerId){
 		self.initLevel();
 	});
 
+	
+	
+	
 };
 
 
@@ -102,7 +109,70 @@ Game.prototype.initLevel = function(){
 	  this.layer.add(background);
 	  this.layer.draw();
 	  
+	  
+	  
 	  this.createWave();
+	  NormalMonster.plsWork();
+	 
+
+	  
+	  
+			
+	window.onload = function(){
+        var stage = new Kinetic.Stage({
+            container1: 'cantainer1',
+            width: 800,
+            height: 600
+        });
+
+        var layer = new Kinetic.Layer();
+
+        var image = new Image();
+        var image2 = new Image();
+        var newX = 500;
+        var animations = {
+        pos1: [{
+            x: 32,
+            y: 32,
+            width: 32,
+            height: 32
+            },
+            {
+            x: 64,
+            y: 32,
+            width: 32,
+            height: 32
+            },
+            {
+            x: 96,
+            y: 32,
+            width: 32,
+            height: 32
+            },{
+            x: 128,
+            y: 32,
+            width: 32,
+            height: 32
+            },
+            {
+            x: 160,
+            y: 32,
+            width: 32,
+            height: 32
+            },
+            {
+            x: 32,
+            y: 0,
+            width: 32,
+            height: 32
+            },],
+
+
+
+        };
+
+}
+	  
 		
 
 };

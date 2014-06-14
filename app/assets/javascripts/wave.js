@@ -8,7 +8,7 @@ function Wave(monstersType, route, layer ){
 	this.eventEmitter = new EventEmitter();
 	this.monsters = [];
 	this.monstersType = monstersType;
-	
+	this.assetsLoader.getImage('monster1Url');
 }
 
 Wave.prototype.spawn = function(){
@@ -20,7 +20,7 @@ Wave.prototype.spawn = function(){
 			self.createMonster();
 		}, interval);
 	
-	}
+	}	
 	
 };
 
