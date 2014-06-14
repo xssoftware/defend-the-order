@@ -36,12 +36,12 @@ MonsterBase.prototype.moveTo = function(coordX, coordY){
 	var dx = this.screenX - currentX;
 	var dy = this.screenY - currentY;
 	var dist = Math.sqrt(dx * dx + dy * dy);
-	var angle = Math.atan2(dy, dx);
+	
 	var direction = '';
 	var tweenDuration = dist / this.speed;
 	var self = this;
 
-	angle = angle * 180 / Math.PI;
+	
 	
 	if(this.screenX > currentX){
 		direction = 'walking_right';

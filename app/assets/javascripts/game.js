@@ -4,6 +4,7 @@ function Game(){
 
 	this.wavesCount = 10;
 	this.wavesCreated = 0;
+	this.waves = [];
 	
 	this.assetsLoader = new AssetsLoader();
 	
@@ -36,6 +37,7 @@ Game.prototype.init = function(levelInfo, containerId){
 	
 	this.assetsLoader.addImage('background', levelInfo.backgroundUrl);
 	this.assetsLoader.addImage('monster1Url', levelInfo.monster1Url);
+	this.assetsLoader.addImage('tower1', levelInfo.tower1Url);
 	
 	
 	
@@ -93,6 +95,8 @@ Game.prototype.createWave = function(){
 	var wave = new Wave(this.levelInfo.monsterType, this.levelInfo.route, this);
 	this.wavesCreated++;
 	
+	this.waves.push(wave);
+	
 	wave.spawn();
 	
 	wave.eventEmitter.registerEvent('waveCleared', function(){
@@ -113,8 +117,9 @@ Game.prototype.drawTerrain = function(){
 					  x : i * this.coordWidth,
 					  y : j * this.coordHeight,
 					  stroke: 'black',
-					  strokeWidth: 1
+					  strokeWidth: 1,
 					});
+					
 					
 				this.coordCells.push(coord);
 					
@@ -138,7 +143,83 @@ Game.prototype.finishLevel =function(){
 
 
 Game.prototype.clickedTower =function(towerId){
+	var i;
+	var self = this;
+	var image = new Kinetic.Image({
+		image : this.assetsLoader.getImage('tower1'),
+		x:0,
+		y:0,
+		width:50,
+		height:50
+	});
 	
+	
+	
+	this.coordsLayer.add(image);
+	this.coordsLayer.visible(true);
+	image.setZIndex(1);
+	this.coordsLayer.draw();
+	
+	for(i = 0; i < this.coordCells.length; i++){
+		this.coordCells[i].setZIndex(2);
+		this.coordCells[i].on('mouseover', function(cell){
+			return function(){
+				var position = cell.position();
+				var gameCoords = self.screenToGameCoords(position.x, position.y);
+				var i;
+				
+				for(i = 0; i < self.levelInfo.route.length; i++){
+					if(self.levelInfo.route[i].x == gameCoords.x && self.levelInfo.route[i].y == gameCoords.y){
+						return false;
+					}
+				}
+				
+				image.position(cell.position());
+				self.coordsLayer.draw();
+			};
+		}(this.coordCells[i]));
+		
+		this.coordCells[i].on('click', function(cell){
+			return function(){
+				var position = cell.position();
+				var gameCoords = self.screenToGameCoords(position.x, position.y);
+				var i;
+				
+				for(i = 0; i < self.levelInfo.route.length; i++){
+					if(self.levelInfo.route[i].x == gameCoords.x && self.levelInfo.route[i].y == gameCoords.y){
+						return false;
+					}
+				}
+				self.placeTower(towerId, position.x, position.y);
+				for(i = 0; i < self.coordCells.length; i++){
+					self.coordCells[i].off('click');
+					self.coordCells[i].off('mouseover');
+				}
+				self.coordsLayer.visible(false);
+			};
+		}(this.coordCells[i]));
+	}
 };
+
+
+Game.prototype.placeTower =function(towerId, x, y){
+	//use correct tower type
+	var tower = new Tower_1(this);
+	tower.init(x,y);
+};
+
+
+Game.prototype.screenToGameCoords =function(x, y){
+	var coordX = x  / this.coordWidth + 1;
+	var coordY = y  / this.coordHeight + 1;
+	return {x : coordX, y : coordY};
+};
+
+Game.prototype.gameToScreenCoords =function(x, y){
+	var coordX = x  * this.coordWidth;
+	var coordY = y  * this.coordHeight;
+	return {x : coordX, y : coordY};
+};
+
 
 
