@@ -1,95 +1,93 @@
 'use strict';
 
 
-function NormalMonster(){
-
-
-}
-
-NormalMonster.prototype.plsWork = function(){
- var stage = new Kinetic.Stage({
-        container: 'container',
-        width: 578,
-        height: 200
-      });
-      var layer = new Kinetic.Layer();
-      var animations = {
-        idle: [{
-          x: 2,
-          y: 2,
-          width: 70,
-          height: 119
-        }, {
-          x: 71,
-          y: 2,
-          width: 74,
-          height: 119
-        }, {
-          x: 146,
-          y: 2,
-          width: 81,
-          height: 119
-        }, {
-          x: 226,
-          y: 2,
-          width: 76,
-          height: 119
-        }],
-        punch: [{
-          x: 2,
-          y: 138,
-          width: 74,
-          height: 122
-        }, {
-          x: 76,
-          y: 138,
-          width: 84,
-          height: 122
-        }, {
-          x: 346,
-          y: 138,
-          width: 120,
-          height: 122
-        }]
-      };
-
-      var imageObj = new Image();
-      imageObj.onload = function() {
-        var blob = new Kinetic.Sprite({
-          x: 250,
-          y: 40,
-          image: imageObj,
-          animation: 'idle',
-          animations: animations,
-          frameRate: 7,
-          index: 0
-        });
-
-        // add the shape to the layer
-        layer.add(blob);
-
-        // add the layer to the stage
-        stage.add(layer);
-
-        // start sprite animation
-        blob.start();
-
-        // resume transition
-        document.getElementById('punch').addEventListener('click', function() {
-          blob.setAnimation('punch');
-
-          blob.afterFrame(2, function() {
-            blob.setAnimation('idle');
-          });
-        }, false);
-      };
-      imageObj.src = 'http://www.html5canvastutorials.com/demos/assets/blob-sprite.png';
+function NormalMonster() {
+	this.width = 32;
+	this.height = 48;
+	this.speed = 90;
 
 }
-
-
-NormalMonster.setMonsterInfo= new MonsterBase();
-
 
 
 NormalMonster.prototype = new MonsterBase();
+
+NormalMonster.prototype.setMonsterInfo = function(route, game) {
+
+	
+
+
+	this.route = route;
+
+
+	this.layer = game.layer;
+	this.game = game;
+
+	this.sprite = new Kinetic.Sprite({
+		x: 1,
+		y: 1,
+		image: this.game.assetsLoader.getImage('monster1Url'),
+		animation: 'walking_front',
+		animations: {
+			walking_front: [
+				// x, y, width, height (6 frames)
+				0, 0, 32, 48,
+				32, 0, 32, 48,
+				64, 0, 32, 48,
+				96, 0, 32, 48
+				
+			],
+			walking_left: [
+				// x, y, width, height (6 frames)
+				0, 48, 32, 48,
+				32, 48, 32, 48,
+				64, 48, 32, 48,
+				96, 48, 32, 48
+			],
+			walking_right: [
+				// x, y, width, height (6 frames)
+				0, 96, 32, 48,
+				32, 96, 32, 48,
+				64, 96, 32, 48,
+				96, 96, 32, 48
+			],
+			walking_back: [
+				// x, y, width, height (6 frames)
+				0, 154, 32, 48,
+				32, 154, 32, 48,
+				64, 154, 32, 48,
+				96, 154, 32, 48	
+			]
+		},
+		frameRate: 7,
+		frameIndex: 0
+	});
+	
+	this.x = this.route[0].x;
+	this.y = this.route[0].y;
+	
+	this.calculateScreenCoords();
+
+	this.container = new Kinetic.Group({
+		x: this.screenX,
+		y: this.screenY,
+		width: this.width,
+		height: this.height
+	});
+
+	this.container.offsetX(this.width / 2);
+	this.container.offsetY(this.height / 2);
+
+	this.container.add(this.sprite);
+	this.layer.add(this.container);
+	this.sprite.start();
+	this.layer.draw();
+	
+	this.moveTo(this.route[1].x, this.route[1].y);
+
+};
+
+
+
+
+
+

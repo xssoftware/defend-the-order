@@ -14,44 +14,17 @@ function Game(){
 	this.stageWidth = 900;
 	this.stageHeight = 500;
 	
-	this.coordWidth = 50;
+	this.coordWidth = 53;
 	this.coordHeight = 50;
 	
 	this.levelInfo = {};
+	this.coordCells = [];
 
 	
 	
 	
 }
 
-
-//const TILE_H = 15;
-//const TILE_W = 15;
-//const MAP_H = 30;
-//const MAP_W = 80;
-
-/*
-function level1(i,j)
-{
-	if(	(i == 0 && (j >= 0 && j <= 2))
-		|| (j == 2 && (i >=0 && i < 70))
-		|| (i == 70 && (j >=2 && j <= 28))
-		|| (j == 28 && (i <= 70 && i >= 60))
-		|| (i == 60 && (j <= 28 && j >= 5))
-		|| (j == 5 && (i <= 60 && i >= 40))
-		|| (i == 40 && (j >= 5 && j <= 25))
-		|| (j == 25 && (i <= 40 && i >= 30))
-		|| (i == 30 && (j >= 20 && j <= 25))
-		|| (j == 20 && (i <= 30 && i >= 5))
-		|| (i == 5 && (j <= 20 && j >= 10))
-		|| (j == 10 && (i >= 5 && i <= 80))
-		)
-	{
-		return true;
-	}
-	return false;
-}
-*/
 
 
 Game.prototype.init = function(levelInfo, containerId){
@@ -93,10 +66,7 @@ Game.prototype.initLevel = function(){
 	
 	
 	  this.drawTerrain();
-	  
-	  
-	  
-	  
+
 	  
 	  var background = new Kinetic.Image({
 		x: 0,
@@ -112,68 +82,7 @@ Game.prototype.initLevel = function(){
 	  
 	  
 	  this.createWave();
-	  NormalMonster.plsWork();
-	 
-
-	  
-	  
-			
-	window.onload = function(){
-        var stage = new Kinetic.Stage({
-            container1: 'cantainer1',
-            width: 800,
-            height: 600
-        });
-
-        var layer = new Kinetic.Layer();
-
-        var image = new Image();
-        var image2 = new Image();
-        var newX = 500;
-        var animations = {
-        pos1: [{
-            x: 32,
-            y: 32,
-            width: 32,
-            height: 32
-            },
-            {
-            x: 64,
-            y: 32,
-            width: 32,
-            height: 32
-            },
-            {
-            x: 96,
-            y: 32,
-            width: 32,
-            height: 32
-            },{
-            x: 128,
-            y: 32,
-            width: 32,
-            height: 32
-            },
-            {
-            x: 160,
-            y: 32,
-            width: 32,
-            height: 32
-            },
-            {
-            x: 32,
-            y: 0,
-            width: 32,
-            height: 32
-            },],
-
-
-
-        };
-
-}
-	  
-		
+	
 
 };
 
@@ -181,7 +90,7 @@ Game.prototype.initLevel = function(){
 
 Game.prototype.createWave = function(){
 	var self = this;
-	var wave = new Wave(this.levelInfo.monsterType, this.levelInfo.route, this.layer);
+	var wave = new Wave(this.levelInfo.monsterType, this.levelInfo.route, this);
 	this.wavesCreated++;
 	
 	wave.spawn();
@@ -207,18 +116,29 @@ Game.prototype.drawTerrain = function(){
 					  strokeWidth: 1
 					});
 					
+				this.coordCells.push(coord);
+					
 				this.coordsLayer.add(coord);
+				
 		}
 	}
 	
+	this.coordsLayer.visible(false);
 	this.coordsLayer.draw();
 
 };
 
 Game.prototype.startLevel=function(){
 
-}
+};
 
 Game.prototype.finishLevel =function(){
 
-}
+};
+
+
+Game.prototype.clickedTower =function(towerId){
+	
+};
+
+
