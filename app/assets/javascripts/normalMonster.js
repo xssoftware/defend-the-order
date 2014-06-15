@@ -9,7 +9,6 @@ function NormalMonster() {
 
 }
 
-
 NormalMonster.prototype = new MonsterBase();
 
 NormalMonster.prototype.setMonsterInfo = function(route, game) {

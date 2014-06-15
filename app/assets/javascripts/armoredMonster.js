@@ -1,7 +1,7 @@
 'use strict';
 
 
-function SpeedMonster(){
+function ArmoredMonster(){
 	this.width = 32;
 	this.height = 48;
 	this.speed = 90;
@@ -9,9 +9,9 @@ function SpeedMonster(){
 
 }
 
-SpeedMonster.prototype = new MonsterBase();
+ArmoredMonster.prototype = new MonsterBase();
 
-SpeedMonster.prototype.setMonsterInfo = function(route, game) {
+ArmoredMonster.prototype.setMonsterInfo = function(route, game) {
 
 	
 
@@ -25,7 +25,7 @@ SpeedMonster.prototype.setMonsterInfo = function(route, game) {
 	this.sprite = new Kinetic.Sprite({
 		x: 1,
 		y: 1,
-		image: this.game.assetsLoader.getImage('monster2Url'),
+		image: this.game.assetsLoader.getImage('monster3Url'),
 		animation: 'walking_front',
 		animations: {
 			walking_front: [

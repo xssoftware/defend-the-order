@@ -1,7 +1,7 @@
 
 function Wave(monstersType, route, game ){
 	
-	this.monstersCount = 10;
+	this.monstersCount = 3;
 	this.route = route;
 	this.game = game;
 	this.layer = game.layer;
@@ -10,10 +10,15 @@ function Wave(monstersType, route, game ){
 	this.monsters = [];
 	this.monstersType = monstersType;
 	
+	
 }
+
 
 Wave.prototype.spawn = function(){
 	var interval = 0, i;
+	
+	f();
+	
 	var self = this;
 	for(i = 0; i < this.monstersCount; i++){
 		interval += 1500;
@@ -26,20 +31,36 @@ Wave.prototype.spawn = function(){
 };
 
 
+function f() {
+
+  f.count = ++f.count || 1 // f.count is undefined at first
+
+  //alert("Call No " + f.count)
+
+}
+
+
+
+
 Wave.prototype.createMonster = function(){
 	// create monster acording to monsterType
 	
 	
-	console.log(number);
-	if (number%3==0){
-		var monster = new SpeedMonster();
-		number++;
-	}
-	else {
-		number++;
-		var monster = new NormalMonster();
-		}
 	
+   
+  
+		
+	//console.log('wave count - '+f.count);
+	//if (f.count%=3){
+	//		
+	//	} if else {f.count%=5}{
+	//		var monster = new ArmoredMonster();
+	//	}
+	//	else 
+	//	{
+	//		var monster = new SpeedMonster();
+	//	}
+	var monster = new NormalMonster();
 	
 	
 	var self = this;
@@ -54,7 +75,7 @@ Wave.prototype.createMonster = function(){
 		
 		if(self.monsters.length === 0){
 			self.eventEmitter.emit('waveCleared');
-			console.log('wave cleared');
+			console.log('Wave Cleared');
 		}
 	});
 };

@@ -1,7 +1,16 @@
 
 
 function Game(){
+	
+	
+	//var wavesCounter = 1; // private variable
 
+    //this.privilegedMethod = function () {
+    //  alert(wavesCounter);
+    //};
+	
+	
+	
 	this.wavesCount = 3;
 	this.wavesCreated = 0;
 	this.waves = [];
@@ -38,6 +47,7 @@ Game.prototype.init = function(levelInfo, containerId){
 	this.assetsLoader.addImage('background', levelInfo.backgroundUrl);
 	this.assetsLoader.addImage('monster1Url', levelInfo.monster1Url);
 	this.assetsLoader.addImage('monster2Url', levelInfo.monster2Url);
+	this.assetsLoader.addImage('monster3Url', levelInfo.monster3Url);
 	this.assetsLoader.addImage('tower1', levelInfo.tower1Url);
 	this.assetsLoader.addImage('tower2', levelInfo.tower2Url);
 	this.assetsLoader.addImage('tower3', levelInfo.tower3Url);
