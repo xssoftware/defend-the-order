@@ -3,6 +3,7 @@
 <% if current_user %>
   <p class="lead">Welcome <%= current_user.email.split('@').first.upcase %>.</p>
 <% end %>
+<% if current_user %>
 <style>
 #game1 {
 	align: center;
@@ -18,12 +19,6 @@
 	<img id="tower1" src="/tower1icon.png" width="50" height="50" />
 
 </div>
-
-fff
-
-
-<%= @levelInfo %>
-
 <script  >
 	
 	window.onload = function(){
@@ -40,3 +35,6 @@ fff
 	
 
 </script> 
+<%else%>
+	<p class="lead">  You need to log in to play the game.</p>
+<%end%>
