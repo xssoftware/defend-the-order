@@ -5,6 +5,7 @@ class StaticPagesController < ApplicationController
 	levelInfo = {
 		"backgroundUrl" => 'http://127.0.0.1:3000/background1.png',
 		"monster1Url" => 'http://127.0.0.1:3000/darthvader.png',
+		"monster2Url" => 'http://127.0.0.1:3000/ironman.png',
 		"tower1Url" => 'http://127.0.0.1:3000/tower1icon.png',
 		"tower2Url" => 'http://127.0.0.1:3000/tower2icon.png',
 		"tower3Url" => 'http://127.0.0.1:3000/tower3icon.png',

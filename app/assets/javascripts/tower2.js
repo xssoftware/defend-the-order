@@ -10,7 +10,7 @@ function Tower_2(game){
 	this.height = 50;
 	this.reloadInterval = 800;
 	this.lastFired = 0;
-	this.damage = 20;
+	this.damage = 15;
 }
 
 

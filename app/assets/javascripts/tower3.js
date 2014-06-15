@@ -10,7 +10,7 @@ function Tower_3(game){
 	this.height = 50;
 	this.reloadInterval = 1500;
 	this.lastFired = 0;
-	this.damage = 60;
+	this.damage = 35;
 }
 
 

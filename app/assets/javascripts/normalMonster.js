@@ -4,7 +4,7 @@
 function NormalMonster() {
 	this.width = 32;
 	this.height = 48;
-	this.speed = 90;
+	this.speed = 50;
 	this.health = 100;
 
 }
@@ -30,7 +30,7 @@ NormalMonster.prototype.setMonsterInfo = function(route, game) {
 		animation: 'walking_front',
 		animations: {
 			walking_front: [
-				// x, y, width, height (6 frames)
+				// x, y, width, height (4 frames)
 				0, 0, 32, 48,
 				32, 0, 32, 48,
 				64, 0, 32, 48,
@@ -38,25 +38,25 @@ NormalMonster.prototype.setMonsterInfo = function(route, game) {
 				
 			],
 			walking_left: [
-				// x, y, width, height (6 frames)
+				// x, y, width, height (4 frames)
 				0, 48, 32, 48,
 				32, 48, 32, 48,
 				64, 48, 32, 48,
 				96, 48, 32, 48
 			],
 			walking_right: [
-				// x, y, width, height (6 frames)
+				// x, y, width, height (4 frames)
 				0, 96, 32, 48,
 				32, 96, 32, 48,
 				64, 96, 32, 48,
 				96, 96, 32, 48
 			],
 			walking_back: [
-				// x, y, width, height (6 frames)
-				0, 154, 32, 48,
-				32, 154, 32, 48,
-				64, 154, 32, 48,
-				96, 154, 32, 48	
+				// x, y, width, height (4 frames)
+				0, 146, 32, 48,
+				32, 146, 32, 48,
+				64, 146, 32, 48,
+				96, 146, 32, 48	
 			]
 		},
 		frameRate: 7,

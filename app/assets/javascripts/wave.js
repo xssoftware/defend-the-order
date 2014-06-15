@@ -9,14 +9,14 @@ function Wave(monstersType, route, game ){
 	this.eventEmitter = new EventEmitter();
 	this.monsters = [];
 	this.monstersType = monstersType;
-
+	
 }
 
 Wave.prototype.spawn = function(){
 	var interval = 0, i;
 	var self = this;
 	for(i = 0; i < this.monstersCount; i++){
-		interval += 1000;
+		interval += 1500;
 		setTimeout(function(){
 			self.createMonster();
 		}, interval);
@@ -28,7 +28,20 @@ Wave.prototype.spawn = function(){
 
 Wave.prototype.createMonster = function(){
 	// create monster acording to monsterType
-	var monster = new NormalMonster();
+	
+	
+	console.log(number);
+	if (number%3==0){
+		var monster = new SpeedMonster();
+		number++;
+	}
+	else {
+		number++;
+		var monster = new NormalMonster();
+		}
+	
+	
+	
 	var self = this;
 	monster.setMonsterInfo(this.route, this.game);
 	
