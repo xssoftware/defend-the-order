@@ -38,6 +38,8 @@ Game.prototype.init = function(levelInfo, containerId){
 	this.assetsLoader.addImage('background', levelInfo.backgroundUrl);
 	this.assetsLoader.addImage('monster1Url', levelInfo.monster1Url);
 	this.assetsLoader.addImage('tower1', levelInfo.tower1Url);
+	this.assetsLoader.addImage('tower2', levelInfo.tower2Url);
+	this.assetsLoader.addImage('tower3', levelInfo.tower3Url);
 	
 	
 	
@@ -148,15 +150,35 @@ Game.prototype.finishLevel =function(){
 
 
 Game.prototype.clickedTower =function(towerId){
+		
+
+
 	var i;
 	var self = this;
-	var image = new Kinetic.Image({
-		image : this.assetsLoader.getImage('tower1'),
+	if (towerId==1){var image = new Kinetic.Image({
+		image : this.assetsLoader.getImage('tower1'),	
 		x:0,
 		y:0,
 		width:50,
 		height:50
 	});
+	} else if (towerId==2){
+	var image = new Kinetic.Image({
+		image : this.assetsLoader.getImage('tower2'),	
+		x:0,
+		y:0,
+		width:50,
+		height:50
+	});
+	} else {
+	var image = new Kinetic.Image({
+		image : this.assetsLoader.getImage('tower3'),	
+		x:0,
+		y:0,
+		width:50,
+		height:50
+	});}
+	
 	
 	
 	
@@ -209,8 +231,10 @@ Game.prototype.clickedTower =function(towerId){
 
 
 Game.prototype.placeTower =function(towerId, x, y){
-	//use correct tower type
-	var tower = new Tower_1(this);
+	if (towerId==1){var tower = new Tower_1(this);} 
+	else if (towerId==2){var tower = new Tower_2(this);}
+	else {var tower = new Tower_3(this);}
+	
 	tower.init(x,y);
 };
 

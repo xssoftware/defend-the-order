@@ -16,8 +16,10 @@
 <div id="towers" >
 
 	<img id="tower1" src="/tower1icon.png" width="50" height="50" />
-
+	<img id="tower2" src="/tower2icon.png" width="50" height="50" />
+	<img id="tower3" src="/tower3icon.png" width="50" height="50" />
 </div>
+<%= @levelInfo %>
 <script  >
 	
 	window.onload = function(){
@@ -26,6 +28,12 @@
 
 		$('#tower1').click(function(){
 			game.clickedTower(1);
+		});
+		$('#tower2').click(function(){
+			game.clickedTower(2);
+		});
+		$('#tower3').click(function(){
+			game.clickedTower(3);
 		});
 	
 	};

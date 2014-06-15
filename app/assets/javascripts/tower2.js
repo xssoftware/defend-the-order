@@ -1,29 +1,28 @@
 'use strict';
 
 
-function Tower_1(game){
+function Tower_2(game){
 	this.game = game;
 	this.layer = game.layer;
-	this.range = 125;
+	this.range = 112;
 	this.interval = null;
 	this.width = 50;
 	this.height = 50;
 	this.reloadInterval = 800;
 	this.lastFired = 0;
-	this.damage = 30;
+	this.damage = 20;
 }
 
 
-Tower_1.prototype = new TowerBase();
+Tower_2.prototype = new TowerBase();
 
-Tower_1.prototype.init = function(x, y){
+Tower_2.prototype.init = function(x, y){
 	this.screenX = x + this.width / 2;
 	this.screenY = y + this.height / 2;
 	var self = this;
 	
 	this.image = new Kinetic.Image({
-	
-		image : this.game.assetsLoader.getImage('tower1'),
+		image : this.game.assetsLoader.getImage('tower2'),
 		x : this.screenX,
 		y : this.screenY,
 		width:this.width,
@@ -42,7 +41,8 @@ Tower_1.prototype.init = function(x, y){
 	
 };
 
-Tower_1.prototype.fire = function(monster){
+
+Tower_2.prototype.fire = function(monster){
 	var time = new Date().getTime();
 	var self = this;
 	if(time - this.reloadInterval < this.lastFired){
@@ -50,9 +50,9 @@ Tower_1.prototype.fire = function(monster){
 	}
 	this.lastFired = time;
 	var circle = new Kinetic.Circle({
-	  radius: 5,
-	  fill: 'yellow',
-	  stroke: 'yellow',
+	  radius: 8,
+	  fill: 'blue',
+	  stroke: 'blue',
 	  x : this.screenX,
 	  y : this.screenY
 	});
@@ -73,7 +73,6 @@ Tower_1.prototype.fire = function(monster){
 	
 	tween.play();
 };
-
 
 
 
