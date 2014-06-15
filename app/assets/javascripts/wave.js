@@ -1,7 +1,7 @@
 
 function Wave(monstersType, route, game ){
 	
-	this.monstersCount = 3;
+	this.monstersCount = 5;
 	this.route = route;
 	this.game = game;
 	this.layer = game.layer;
@@ -50,17 +50,16 @@ Wave.prototype.createMonster = function(){
    
   
 		
-	//console.log('wave count - '+f.count);
-	//if (f.count%=3){
-	//		
-	//	} if else {f.count%=5}{
-	//		var monster = new ArmoredMonster();
-	//	}
-	//	else 
-	//	{
-	//		var monster = new SpeedMonster();
-	//	}
-	var monster = new NormalMonster();
+	console.log(f.count);
+		if (f.count%=2){
+			var monster = new NormalMonster();
+			//var monster = new ArmoredMonster();
+		} else if  (f.count%=3){
+			var monster = new ArmoredMonster();
+		} else {
+			var monster = new SpeedMonster();
+		}
+	
 	
 	
 	var self = this;

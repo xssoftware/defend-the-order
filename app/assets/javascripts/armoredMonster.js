@@ -9,7 +9,7 @@ function ArmoredMonster(){
 
 }
 
-ArmoredMonster.prototype = new MonsterBase();
+//ArmoredMonster.prototype = new MonsterBase();
 
 ArmoredMonster.prototype.setMonsterInfo = function(route, game) {
 

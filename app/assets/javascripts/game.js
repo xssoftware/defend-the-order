@@ -11,7 +11,7 @@ function Game(){
 	
 	
 	
-	this.wavesCount = 3;
+	this.wavesCount = 6;
 	this.wavesCreated = 0;
 	this.waves = [];
 	
