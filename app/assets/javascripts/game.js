@@ -26,10 +26,27 @@ function Game(){
 	this.levelInfo = {};
 	this.coordCells = [];
 
+	this.lifes=10;
+	this.gold=120;
 	
 	
+	// var gold = 120;  // Private variable 
+
+	this.gold = 120;  // Public variable 
+
+	this.goldStatic = function () {  // Public Method
+		alert(gold);
+	};
 	
 }
+
+Game.prototype.goldStatic = function () {    
+  alert(this.gold);
+};
+
+
+Game.goldStatic = 150;
+var gold = new Game();
 
 
 
@@ -38,7 +55,8 @@ Game.prototype.init = function(levelInfo, containerId){
 	
 	this.levelInfo = levelInfo;
 	
-
+	
+	
 	
 	this.assetsLoader.addImage('background', levelInfo.backgroundUrl);
 	this.assetsLoader.addImage('monster1Url', levelInfo.monster1Url);
@@ -98,6 +116,8 @@ Game.prototype.initLevel = function(){
 	  
 	  this.createWave();
 	
+	$('#gold').html(this.gold);
+	$('#lifes').html(this.lifes);
 
 };
 
@@ -112,11 +132,12 @@ Game.prototype.createWave = function(){
 	this.wavesCreated++;
 	
 	if (this.wavesCreated % 2 === 0){
-		monsterType = 'NormalMonster';
+		monsterType = 'SpeedMonster';
 	} else if  (this.wavesCreated % 3 === 0){
 		monsterType = 'ArmoredMonster';
 	} else {
-		monsterType = 'SpeedMonster';
+		monsterType = 'NormalMonster';
+		
 	}
 	
 		
@@ -187,6 +208,7 @@ Game.prototype.clickedTower =function(towerId){
 		width:50,
 		height:50
 	});
+		
 	} else if (towerId==2){
 	var image = new Kinetic.Image({
 		image : this.assetsLoader.getImage('tower2'),	
@@ -195,6 +217,7 @@ Game.prototype.clickedTower =function(towerId){
 		width:50,
 		height:50
 	});
+	
 	} else {
 	var image = new Kinetic.Image({
 		image : this.assetsLoader.getImage('tower3'),	
@@ -202,7 +225,10 @@ Game.prototype.clickedTower =function(towerId){
 		y:0,
 		width:50,
 		height:50
-	});}
+	});
+	
+	}
+	
 	
 	
 	
@@ -256,10 +282,16 @@ Game.prototype.clickedTower =function(towerId){
 
 
 Game.prototype.placeTower =function(towerId, x, y){
-	if (towerId==1){var tower = new Tower_1(this);} 
-	else if (towerId==2){var tower = new Tower_2(this);}
-	else {var tower = new Tower_3(this);}
-	
+	if (towerId==1){var tower = new Tower_1(this);
+		
+		
+	$('#gold').html(this.gold-50);
+	} 
+	else if (towerId==2){var tower = new Tower_2(this);
+	$('#gold').html(this.gold-100);
+	}
+	else {var tower = new Tower_3(this);
+	$('#gold').html(this.gold-200);}
 	tower.init(x,y);
 };
 

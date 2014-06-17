@@ -11,6 +11,7 @@ function Tower_1(game){
 	this.reloadInterval = 800;
 	this.lastFired = 0;
 	this.damage = 20;
+	
 }
 
 
@@ -39,6 +40,10 @@ Tower_1.prototype.init = function(x, y){
 	setInterval(function(){
 		self.scan();
 	}, 100);
+	
+	
+
+	
 	
 };
 
