@@ -38,7 +38,7 @@ MonsterBase.prototype.moveTo = function(coordX, coordY){
 	var dist = Math.sqrt(dx * dx + dy * dy);
 	
 	var direction = '';
-	var tweenDuration = dist / this.speed;
+	var tweenDuration = parseFloat(dist / this.speed).toFixed(3);
 	var self = this;
 
 	
@@ -67,10 +67,12 @@ MonsterBase.prototype.moveTo = function(coordX, coordY){
 	  onFinish: function(){	 
 		if(self.route[self.routeIndex]){
 			self.moveTo(self.route[self.routeIndex].x, self.route[self.routeIndex].y);
-		}
+		} 
 		
 	  }
 	}).play();
+	
+	
 
 };
 

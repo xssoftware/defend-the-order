@@ -47,7 +47,7 @@ TowerBase.prototype.fire = function(monster){
 	  y : this.screenY
 	});
 	
-	this.game.layer.add(circle);
+	this.game.towersLayer.add(circle);
 	
 	var tween = new Kinetic.Tween({
 	  node: circle,

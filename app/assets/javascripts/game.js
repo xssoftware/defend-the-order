@@ -3,16 +3,10 @@
 function Game(){
 	
 	
-	//var wavesCounter = 1; // private variable
-
-    //this.privilegedMethod = function () {
-    //  alert(wavesCounter);
-    //};
-	
-	
 	
 	this.wavesCount = 6;
 	this.wavesCreated = 0;
+
 	this.waves = [];
 	
 	this.assetsLoader = new AssetsLoader();
@@ -20,6 +14,8 @@ function Game(){
 	this.stage = null;
 	this.layer = null;
 	this.coordsLayer = null;
+	this.backgroundLayer = null;
+	this.towersLayer = null;
 	
 	this.stageWidth = 900;
 	this.stageHeight = 500;
@@ -60,10 +56,14 @@ Game.prototype.init = function(levelInfo, containerId){
 	  container: containerId
 	});
 	
+	this.backgroundLayer = new Kinetic.Layer();
 	this.layer = new Kinetic.Layer();
+	this.towersLayer = new Kinetic.Layer();;
 	this.coordsLayer = new Kinetic.Layer();
 	
+	this.stage.add(this.backgroundLayer);
 	this.stage.add(this.layer);
+	this.stage.add(this.towersLayer);
 	this.stage.add(this.coordsLayer);
 	
 	
@@ -91,8 +91,8 @@ Game.prototype.initLevel = function(){
 		height: this.stageHeight
 	  });
 	  
-	  this.layer.add(background);
-	  this.layer.draw();
+	  this.backgroundLayer.add(background);
+	  this.backgroundLayer.draw();
 	  
 	  
 	  
@@ -105,8 +105,22 @@ Game.prototype.initLevel = function(){
 
 Game.prototype.createWave = function(){
 	var self = this;
-	var wave = new Wave(this.levelInfo.monsterType, this.levelInfo.route, this);
+	var monsterType;
+	
+	
+	
 	this.wavesCreated++;
+	
+	if (this.wavesCreated % 2 === 0){
+		monsterType = 'NormalMonster';
+	} else if  (this.wavesCreated % 3 === 0){
+		monsterType = 'ArmoredMonster';
+	} else {
+		monsterType = 'SpeedMonster';
+	}
+	
+		
+	var wave = new Wave(monsterType, this.levelInfo.route, this);
 	
 	if(this.wavesCreated > this.wavesCount){
 		return;

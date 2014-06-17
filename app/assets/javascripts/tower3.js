@@ -3,7 +3,7 @@
 
 function Tower_3(game){
 	this.game = game;
-	this.layer = game.layer;
+	this.layer = game.towersLayer;
 	this.range = 120;
 	this.interval = null;
 	this.width = 50;
