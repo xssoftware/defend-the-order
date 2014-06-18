@@ -1,7 +1,7 @@
 
 function Wave(monstersType, route, game ){
 	
-	this.monstersCount = 5;
+	this.monstersCount = 10;
 	this.mostersCreated = 0;
 	this.route = route;
 	this.game = game;
