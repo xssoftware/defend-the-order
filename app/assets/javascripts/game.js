@@ -282,17 +282,25 @@ Game.prototype.clickedTower =function(towerId){
 
 
 Game.prototype.placeTower =function(towerId, x, y){
-	if (towerId==1){var tower = new Tower_1(this);
-		
-		
-	$('#gold').html(this.gold-50);
-	} 
-	else if (towerId==2){var tower = new Tower_2(this);
-	$('#gold').html(this.gold-100);
+	var tower;
+	if (towerId == 1) {
+		tower = new Tower_1(this);
 	}
-	else {var tower = new Tower_3(this);
-	$('#gold').html(this.gold-200);}
-	tower.init(x,y);
+	else if (towerId == 2) {
+		tower = new Tower_2(this);
+	}
+	else {
+		tower = new Tower_3(this);
+	}
+	
+	if(tower.price > this.gold){
+		alert('not enough gold');
+		return;
+	}
+	
+	this.gold -= tower.price;
+	$('#gold').html(this.gold);
+	tower.init(x, y);
 };
 
 

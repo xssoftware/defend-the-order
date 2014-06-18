@@ -14,6 +14,7 @@ function MonsterBase(){
 	this.eventEmitter = new EventEmitter();
 	this.health = 0;
 	this.routeIndex = 1;
+	this.gold = 0;
 	
 }
 
@@ -79,7 +80,8 @@ MonsterBase.prototype.moveTo = function(coordX, coordY){
 
 
 MonsterBase.prototype.die = function(){
-	
+	this.game.gold += this.gold;
+	$('#gold').html(this.game.gold);
 	this.container.remove();
 	this.eventEmitter.emit('monsterDead', this);
 };

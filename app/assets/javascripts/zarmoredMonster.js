@@ -6,7 +6,7 @@ function ArmoredMonster(){
 	this.height = 48;
 	this.speed = 90;
 	this.health = 100;
-
+	this.gold = 40;
 }
 
 ArmoredMonster.prototype = new MonsterBase();

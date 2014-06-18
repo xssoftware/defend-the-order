@@ -9,6 +9,8 @@ function TowerBase(){
 	this.reloadInterval = 0;
 	this.lastFired = 0;
 	this.damage = 0;
+	this.price = 0;
+	
 }
 
 

@@ -11,6 +11,7 @@ function Tower_2(game){
 	this.reloadInterval = 800;
 	this.lastFired = 0;
 	this.damage = 15;
+	this.price = 100;
 }
 
 

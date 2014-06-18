@@ -3,14 +3,7 @@
 <% if current_user %>
   <p class="lead">Welcome <%= current_user.email.split('@').first.upcase %>.</p>
 <% end %>
-<style>
-#game1 {
-	align: center;
-    color: black;
-    border-style: solid;
-    border-width: 5px;
-}
-</style>
+
 <div id="game1"></div>
 <div id="towers" >
 
@@ -20,12 +13,14 @@
 	<img id="tower2" src="/tower2icon.png" width="50" height="50" />
 	<img id="tower3" src="/tower3icon.png" width="50" height="50" />
 
+<br />
+
 
 <span style="font-size:30px; padding-left:5px; background:green;">Gold - </span>
 
-<span id="gold" style="font-size:30px; padding-left:5px; background:green;">Gol  d - </span>
+<span id="gold" style="font-size:30px; padding-left:5px; background:green;"></span>
 
-
+<br />
 
 
 <span style="font-size:30px; padding-left:5px; background:red;">Lifes - </span>
@@ -33,13 +28,13 @@
 <span id="lifes" style="font-size:30px; padding-left:5px; background:red;">0</span>
 
 </div>
+<br>
 
 
-<span  style="font-size:30px; padding-left:5px; background:white;">50     </span>
-<span  style="font-size:30px; padding-left:5px; background:white;">100</span>
-<span  style="font-size:30px; padding-left:5px; background:white;">200</span>
 
-<%= @levelInfo %>
+<br style="clear:both" />
+
+
 <script  >
 	
 	window.onload = function(){

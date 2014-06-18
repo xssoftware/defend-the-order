@@ -6,6 +6,7 @@ function NormalMonster() {
 	this.height = 48;
 	this.speed = 50;
 	this.health = 100;
+	this.gold = 20;
 
 }
 
