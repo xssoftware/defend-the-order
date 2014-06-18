@@ -37,6 +37,9 @@ Wave.prototype.spawn = function(){
 Wave.prototype.createMonster = function(monsterType){
 	// create monster acording to monsterType
 	var monster;
+	if(!this.game.gameRunning){
+		return false;
+	}
 	
 	if (this.monstersType === 'NormalMonster'){
 		monster = new NormalMonster();
@@ -56,10 +59,9 @@ Wave.prototype.createMonster = function(monsterType){
 	monster.eventEmitter.registerEvent('monsterDead', function(monster){
 		var index = self.monsters.indexOf(monster);
 		self.monsters.splice(index, 1);
-		
 		if(self.monsters.length === 0 && self.mostersCreated == self.monstersCount){
 			self.eventEmitter.emit('waveCleared');
-			console.log('Wave Cleared');
+			
 		}
 	});
 };

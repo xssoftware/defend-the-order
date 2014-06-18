@@ -34,19 +34,9 @@ function Game(){
 
 	this.gold = 120;  // Public variable 
 
-	this.goldStatic = function () {  // Public Method
-		alert(gold);
-	};
+	this.gameRunning = true;
 	
 }
-
-Game.prototype.goldStatic = function () {    
-  alert(this.gold);
-};
-
-
-Game.goldStatic = 150;
-var gold = new Game();
 
 
 
@@ -126,8 +116,9 @@ Game.prototype.initLevel = function(){
 Game.prototype.createWave = function(){
 	var self = this;
 	var monsterType;
-	
-	
+	if(!this.gameRunning){
+		return false;
+	}
 	
 	this.wavesCreated++;
 	
@@ -144,6 +135,8 @@ Game.prototype.createWave = function(){
 	var wave = new Wave(monsterType, this.levelInfo.route, this);
 	
 	if(this.wavesCreated > this.wavesCount){
+		alert('YOU WIN');
+		this.gameRunnig = false;
 		return;
 	}
 	
@@ -317,4 +310,12 @@ Game.prototype.gameToScreenCoords =function(x, y){
 };
 
 
-
+Game.prototype.looseLife = function(){
+	this.lifes--;
+	if(this.lifes === 0){
+		alert('GAME OVER!');
+		this.gameRunning = false;
+		return;
+	}
+	$('#lifes').html(this.lifes);
+};

@@ -15,6 +15,7 @@ function MonsterBase(){
 	this.health = 0;
 	this.routeIndex = 1;
 	this.gold = 0;
+
 	
 }
 
@@ -66,9 +67,18 @@ MonsterBase.prototype.moveTo = function(coordX, coordY){
 	  duration: tweenDuration,
 	  easing: Kinetic.Easings.Linear,
 	  onFinish: function(){	 
+		if(self.routeIndex >= self.route.length){
+			self.game.looseLife();
+			self.container.remove();
+			self.eventEmitter.emit('monsterDead', self);
+			return;
+		}
+		  
 		if(self.route[self.routeIndex]){
 			self.moveTo(self.route[self.routeIndex].x, self.route[self.routeIndex].y);
 		} 
+		
+		
 		
 	  }
 	}).play();
@@ -82,6 +92,7 @@ MonsterBase.prototype.moveTo = function(coordX, coordY){
 MonsterBase.prototype.die = function(){
 	this.game.gold += this.gold;
 	$('#gold').html(this.game.gold);
+	
 	this.container.remove();
 	this.eventEmitter.emit('monsterDead', this);
 };
