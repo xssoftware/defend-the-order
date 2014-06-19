@@ -287,7 +287,10 @@ Game.prototype.placeTower =function(towerId, x, y){
 	}
 	
 	if(tower.price > this.gold){
-		alert('not enough gold');
+		$('#errorMesssage').html('Not enough gold');
+		setTimeout(function(){
+			$('#errorMesssage').html('');
+		}, 1500);
 		return;
 	}
 	

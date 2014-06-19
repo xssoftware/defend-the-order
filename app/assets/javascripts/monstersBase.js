@@ -67,6 +67,10 @@ MonsterBase.prototype.moveTo = function(coordX, coordY){
 	  duration: tweenDuration,
 	  easing: Kinetic.Easings.Linear,
 	  onFinish: function(){	 
+		if(!self.isAlive()){
+			return false;
+		}
+		  
 		if(self.routeIndex >= self.route.length){
 			self.game.looseLife();
 			self.container.remove();
